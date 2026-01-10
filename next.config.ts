@@ -30,6 +30,18 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  distDir: '.next',
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  experimental: {
+    appDir: true,
+  },
+  webpack: (config, {isServer}) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': require('path').resolve(__dirname, './src/testnet'),
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
