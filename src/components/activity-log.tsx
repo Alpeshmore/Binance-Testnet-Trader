@@ -1,3 +1,7 @@
+
+"use client";
+
+import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -15,6 +19,12 @@ type ActivityLogProps = {
 };
 
 export function ActivityLog({ logs }: ActivityLogProps) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const getLogColor = (type: LogEntry["type"]) => {
     switch (type) {
       case "SUCCESS":
@@ -42,7 +52,9 @@ export function ActivityLog({ logs }: ActivityLogProps) {
         <ScrollArea className="h-[200px] w-full rounded-md border p-4 bg-background/50">
           {logs.map((log) => (
             <div key={log.id} className="text-sm font-mono mb-2 last:mb-0">
-              <span className="text-primary/70">{log.timestamp.toLocaleTimeString()} - </span>
+              {isClient && (
+                <span className="text-primary/70">{log.timestamp.toLocaleTimeString()} - </span>
+              )}
               <span className={cn(getLogColor(log.type))}>{log.message}</span>
             </div>
           ))}
