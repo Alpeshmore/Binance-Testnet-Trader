@@ -93,10 +93,10 @@ function OrderFormBase({ schema, onSubmit, type }: { schema: z.ZodObject<any>; o
     resolver: zodResolver(schema),
     defaultValues: {
       symbol: "BTCUSDT",
-      quantity: undefined,
+      quantity: "",
       side: "BUY",
-      price: undefined,
-      stopPrice: undefined,
+      price: "",
+      stopPrice: "",
     },
   });
 
